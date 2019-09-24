@@ -9,9 +9,17 @@ CREATE TABLE PLAYER(
 );
 
 CREATE TABLE COUNTRY(
-    player INTEGER  REFERENCES player(id_player),
+    player INTEGER  PRIMARY KEY REFERENCES player(id_player),
     name varchar(100) NOT NULL
 );
+
+CREATE TABLE HOBBY(
+    player INTEGER  REFERENCES player(id_player),
+    player_key INTEGER,
+    description varchar(100) NOT NULL
+);
+
+
 CREATE TABLE DEPARTMENT (
   ID INTEGER AUTO_INCREMENT PRIMARY KEY,
   NAME varchar(100) NOT NULL

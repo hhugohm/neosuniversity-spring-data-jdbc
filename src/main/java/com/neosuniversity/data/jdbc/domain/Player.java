@@ -5,6 +5,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @JsonRootName(value = "player")
 @Table(value = "PLAYER")
 public class Player {
@@ -18,8 +21,14 @@ public class Player {
     @Column(value = "lastname_player")
     private String last;
 
+
+    // relation one to one
     private Country country;
 
+    // relation one to many
+    private Map<Integer,Hobby> mapTeam = new HashMap<>();
+
+    public Player(){}
 
     public Player(String name, String last, Country country) {
         this.name = name;
@@ -27,14 +36,11 @@ public class Player {
         this.country = country;
     }
 
-    @Override
-    public String toString() {
-        return "Player{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", lastName='" + last + '\'' +
-                ", country=" + country +
-                '}';
+    public Player(String name, String last, Country country, Map<Integer, Hobby> mapTeam) {
+        this.name = name;
+        this.last = last;
+        this.country = country;
+        this.mapTeam = mapTeam;
     }
 
     public int getId() {
@@ -67,5 +73,13 @@ public class Player {
 
     public void setCountry(Country country) {
         this.country = country;
+    }
+
+    public Map<Integer, Hobby> getMapTeam() {
+        return mapTeam;
+    }
+
+    public void setMapTeam(Map<Integer, Hobby> mapTeam) {
+        this.mapTeam = mapTeam;
     }
 }
